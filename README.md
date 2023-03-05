@@ -1,142 +1,76 @@
-আজকে জাভাস্ক্রিপ্ট নিয়ে আড্ডা আর আলোচনা (মডিউল ৩৯)
+<!-- Introduction to Javascript -->
 
+1. What really is JavaScript?
 
+- JavaScript is a highly abstract programming language.
 
-#module_release #browser_debug_milestone #module_39
+High Abstraction is the way of:
+- hiding the implementation details
+- showing only the functionality to the users
+Example: ATM Machine 
 
+- We don't have to handle the resource management and memory allocation
+- We don't have to handle the garbage collection
+- Reduces details so that developers can focus on the logic better
+- Improve understandability as well as maintainability of the code
 
+2. How javascript collects garbage automatically?
 
-ওয়াও। তুমি জাভাস্ক্রিপ্ট এর সাথে একটা ভালো সখ্যতা তৈরি করে ফেলেছো। যেই কারণে বেসিক জাভাস্ক্রিপ্ট থেকে শুরু করে হালকা কিছু প্রবলেম সলভিং, DOM, API এবং কনসেপচুয়াল কিছু জিনিস তুমি একটু হলেও জানো। এবং তিনটা জাভাস্ক্রিপ্ট রিলেটেড এসাইনমেন্টও করে ফেলছো। এতদিন জাভাস্ক্রিপ্ট তোমার বন্ধু হিসেবেই ছিলো। তবে বন্ধু মাঝে মধ্যে নাড়াচাড়া দিয়ে উঠতে পারে। এমনকি কিছু কিছু বন্ধু বেঈমানও হয়ে যেতে পারে। সেই সব সময় কিভাবে সিস্টেম করতে হবে তার কিছু জিনিস দেখা হবে এই মাইলস্টোন এ। 
+- First, It collects unused data
+- Then, free the memory with the help of an algorithm called 'Mark and sweep'
+- The garbage collector goes through the roots making them on their way.
+- It then moves on to the references and marks them as well
+- The cycles continue until the garbage collector reaches all the roots and references
+- The garbage collector removes all the references except for the ones that were marked
 
+3. JavsScript is a JIT-compiled language, explain.
 
+- JIT means 'Just-In-Time'. 
+- JavaScript is not a purely interpreted language.
+- Modern JavaScript is JIT compiled
+- Just-In-Time compiler converts the entire code into machine-readable and executes them immediately.
 
-ব্রাউজার এন্ড ডিবাগ মাইলস্টোন
+4. JavaScript is a multi-paradigm programming language.
 
+- Procedural Programming
+- Object-Oriented Programming
+- Functional Programming
 
+5. JavaScript is a proto-typed-based programming language.
 
-এই মাইলস্টোন এর শুরুই হবে তোমার চিরপরিচিত জাভাস্ক্রিপ্ট নিয়ে আলোচনা করা হবে। যদিও জাভাস্ক্রিপ্ট সম্পর্কেও তুমি সেই অনেকটুকু জেনে ফেলেছ। তারপরেও জাভাস্ক্রিপ্ট সম্পর্কে আরও interesting টপিকস নিয়ে তোমাদের সাথে share করা হবে। 
+- In javascript, everything (function, array, object) is an object except for primitive types
+- A prototypical object is an object that is used as a template from which to get the initial properties of a new object
+- Proto-type is a blueprint
 
+6. JavaScript is a Dynamically Typed Language.
 
+- We don't have to assign the data type while declaring a variable
 
-এরপর কিভাবে জাভাস্ক্রিপ্ট এ কোন ইস্যু হলে সেটা সলভ করতে হয়। সেটা সম্পর্কে জানবে এই milestone এ। 
 
+<!-- JavaScript Engine V8 Internal mechanism -->
 
+The V8 engine is an open-source JavaScript engine developed by Google. It is written in C++ and is used in Google Chrome, Node.js, and other applications. The V8 engine compiles JavaScript code to machine code for fast execution.
 
-.
+Here are some of the internal mechanisms of the V8 engine:
 
-আজকের মডিউল:
+Parsing: The first step in executing a JavaScript program is parsing. The V8 engine parses the code and generates an Abstract Syntax Tree (AST) representation of the program.
 
+Optimization: After parsing, the V8 engine optimizes the code. It analyzes the code to find hot functions (functions that are executed frequently) and optimizes them for fast execution.
 
+Compilation: The V8 engine compiles the optimized code to machine code. This is done using the Just-In-Time (JIT) compiler, which compiles the code at runtime.
 
-জাস্ট ৯টা ভিডিও। প্রথমেই জাভাস্ক্রিপ্ট এর কিছু ফিচার নিয়ে আলোচনা করব।তারপরে ছোট করে জাভাস্ক্রিপ্ট এর সেই famous V8 Engine সম্পর্কে কিছু জানবো, event loop এবং concurrency ব্যপারে জানবো, Execution Context এবং Call stack কি জিনিস সেটা বুঝবো, setTimeout এবং setInterval এর ভিতরের খুঁটিনাটি অনেক জিনিস জানবে। তারপরে এই রকম আরও দরকারি কিছু জিনিস আলোচনা করা হবে এই মডিউলে যাতে করে তুমি জাভাস্ক্রিপ্ট কিভাবে synchronous এবং asynchronous হিসেবে কাজ করে সেটা বুঝো। এটা জানা লাগবে। ওহ try, catch এর ব্যপারে জানা হলেও আমাদের কিন্তু throw, finally সম্পর্কে কিছু জানা হয় নেই। এই module এ এগুলো নিয়ে আলোচনা করা হবে।
+Garbage Collection: The V8 engine uses a garbage collector to manage memory. It automatically deallocates memory that is no longer in use to prevent memory leaks.
 
-.
+Event Loop: The V8 engine implements an event loop to handle asynchronous operations. It allows the program to execute other code while waiting for an asynchronous operation to complete.
 
-আজকে যে যে জিনিসগুলো একটু খেয়াল করতে হবে 
+Call Stack: The V8 engine uses a call stack to keep track of function calls. When a function is called, it is added to the top of the call stack. When the function returns, it is removed from the call stack.
 
+Heap: The V8 engine uses a heap to store objects and other data structures. The heap is managed by the garbage collector.
 
+Profiling: The V8 engine can profile the code to identify performance bottlenecks. It provides various tools for profiling, such as the Chrome DevTools.
 
-১. জাভাক্রিপ্ট এর কি এবং জাভাক্রিপ্ট ফিচার সম্পর্কে কিছু নোটস নিয়ে রাখো।
+Overall, the V8 engine is a complex system that optimizes JavaScript code for fast execution. It includes various mechanisms, such as parsing, optimization, compilation, garbage collection, event loop, call stack, heap, and profiling.
 
 
-
-২. V8 ইঞ্জিন যে ক্রোম এর ভিতরে জাভাক্রিপ্ট কোড রান করে আউটপুট দেয় সেটা জানতে হবে। আরেকটু বেশি জানতে চাইলে JIT সম্পর্কে নোটস নিয়ে রাখতে পারো
-
- 
-
-২. setTimeout কি জিনিস। এইটা কিভাবে কাজ করে সেটা একটু মাথায় থাকতে হবে 
-
-
-
-৩. event loop লুপ কি জিনিস। এই রিলেটেড পুরা জিনিসটা আজকে অনেকেই বুঝবে না। তবে দেখে রাখা লাগবে। নামগুলো নোটস নিয়ে রাখবে। 
-
-
-
-8. Synchronous এবং asynchronous এর পার্থক্যটা জেনে রাখো এবং promise, async /await টা কিভাবে কাজ করে সেটার উপর কিছু নোটস নিয়ে রাখো।
-
-
-
-৫. try,catch সাথে throw আর finally ব্যবহার করা যাই এবং কেন ব্যবহার করা হয় সেই সম্পর্কে একটু ধারনা নিয়ে রাখো।
-
-
-
-তাহলেই হবে।।।
-
-.
-
-কনসেপ্ট ক্লিয়ার হয়নি: 
-
-
-
-আজকে কিছু কিছু জিনিস বেখাপ্পা লাগবে। পুরা বুঝতে পারবে না। তাই দরকার হলে ইউটিউবে আরো ভিডিও দেখো। গুগলে সার্চ দিয়ে আর্টিকেল বের করে পড়ো। এবং ভালো রিসোর্স পেলে গুছিয়ে সেটা অন্যদের সাথে শেয়ার করো। তবে মেইন মেইন নামগুলো একটু খেয়াল করতে হবে। এই কনসেপ্টগুলো ফিউচারে কিছুটা কাজে লাগবে। তাই এখন একটু জেনে রাখো। মোটামুটি নোটস নিয়ে রাখো। 
-
-
-
-মাইলস্টোন-০৭ এর টেনটেটিভ আউটলাইন
-
-মার্চ ০৪: মডিউল ৩৯: More about JavaScript
-
-মার্চ ০৫: মডিউল ৪০: Common Error Types in JS
-
-মার্চ ০৬: মডিউল ৪০.৫: Debugging Practice Day(প্র্যাক্টিস ডে)
-
-মার্চ ০৬: রাত ৯.০০: কন্সেপচুয়াল সেশন-Moniruzzaman
-
-
-
-মার্চ ০৭: মডিউল ৪১: Few More JavaScript Debug
-
-মার্চ ০৮: নো মডিউল(শবই বরাতের বন্ধ)
-
-মার্চ ০৯: মডিউল ৪২: Everything about browsers 
-
-মার্চ ১০: মডিউল ৪২.৫: Browser API practice(প্র্যাক্টিস ডে)
-
-মার্চ ১০: রাত ৯.০০: কন্সেপচুয়াল সেশন
-
-
-
-মার্চ ১১: মডিউল ৪৩: Dev Tool and Debug projects 
-
-মার্চ ১২: মডিউল ৪৪: JavaScript You need to know for React
-
-মার্চ ১৩: মডিউল ৪৪.৫: Devtool and debug practice(প্র্যাক্টিস ডে)
-
-মার্চ ১৩: রাত ৯.০০: কন্সেপচুয়াল সেশন-Zihad
-
-
-
-মার্চ ১৪: নো মডিউল (এক্সট্রা প্র্যাক্টিস ডে)
-
-মার্চ ১৫: মডিউল ৪৫: এসাইনমেন্ট ৭
-
-মার্চ ১৬: মডিউল ৪৫.৫: Browser Debug bonus video(প্র্যাক্টিস ডে)
-
-
-
-মার্চ ১৭: নো মডিউল(প্র্যাক্টিস ডে)
-
-মার্চ ১৭: রাত ৯.০০: কন্সেপচুয়াল সেশন
-
-মার্চ ১৮: নো মডিউল(প্র্যাক্টিস ডে)
-
-মার্চ ১৮: রাত ৯.০০: কন্সেপচুয়াল সেশন
-
-মার্চ ১৯: মাইলস্টোন -০৮(মডিউল ৪৬-React)
-
-
-
-
-
-
-
-ইভেন্ট আর লুপ পিরীতি করে বানাইছে event লুপ, 
-
-সাক্ষী ছিল synchronous আর asynchronous এর স্যুপ। 
-
-মশলা হিসেবে পেয়ে গেছে stack, queue আর heap
-
-একটু খেয়াল করলে, কনসেপ্টটা নয়তো ওতো ডিপ 
-
-একটু বুঝে নোটস নিয়ে, দিয়ে দাও আরামের একটা স্লিপ। 
+<!--  JavaScript Execution Context and Call stack -->
 
